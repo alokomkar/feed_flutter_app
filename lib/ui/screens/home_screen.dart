@@ -56,8 +56,8 @@ class HomeScreenState extends State<HomeScreen> {
     onFavoriteButtonPressed: _handleFavoritesListChanged,
   );
 
-  AppBar _buildAppBarWithTabs() => AppBar(
-    backgroundColor: Colors.white,
+  AppBar _buildAppBarWithTabs(BuildContext context) => AppBar(
+    backgroundColor: Theme.of(context).backgroundColor,
     elevation: 2.0,
     bottom: TabBar(
       labelColor: Theme.of(context).indicatorColor,
@@ -97,7 +97,7 @@ class HomeScreenState extends State<HomeScreen> {
         appBar: PreferredSize( // New code
           // We set Size equal to passed height (50.0) and infinite width:
           preferredSize: Size.fromHeight(50.0), // New code
-          child: _buildAppBarWithTabs(),
+          child: _buildAppBarWithTabs(context),
         ),
         body: Padding(
           padding: EdgeInsets.all(5.0),

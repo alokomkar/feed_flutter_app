@@ -14,7 +14,7 @@ class RecipeCard extends StatelessWidget {
         @required this.inFavorites,
         @required this.onFavoriteButtonPressed});
 
-  RawMaterialButton _buildFavoriteButton() {
+  RawMaterialButton _buildFavoriteButton(BuildContext context) {
     return RawMaterialButton(
       constraints: const BoxConstraints(minWidth: 40.0, minHeight: 40.0),
       onPressed: () => onFavoriteButtonPressed(recipe.id),
@@ -22,14 +22,15 @@ class RecipeCard extends StatelessWidget {
         // Conditional expression:
         // show "favorite" icon or "favorite border" icon depending on widget.inFavorites:
         inFavorites == true ? Icons.favorite : Icons.favorite_border,
+        color: Theme.of(context).iconTheme.color, // New code
       ),
       elevation: 2.0,
-      fillColor: Colors.white,
+      fillColor: Theme.of(context).buttonColor, // New code
       shape: CircleBorder(),
     );
   }
 
-  Padding _buildTitleSection() {
+  Padding _buildTitleSection(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(15.0),
       child: Column(
@@ -48,6 +49,8 @@ class RecipeCard extends StatelessWidget {
               SizedBox(width: 5.0),
               Text(
                 recipe.getDurationString,
+                // New code
+                style: Theme.of(context).textTheme.caption,
               ),
             ],
           ),
@@ -79,13 +82,13 @@ class RecipeCard extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    child: _buildFavoriteButton(),
+                    child: _buildFavoriteButton(context),
                     top: 2.0,
                     right: 2.0,
                   ),
                 ],
               ),
-              _buildTitleSection(),
+              _buildTitleSection(context),
             ],
           ),
         ),
